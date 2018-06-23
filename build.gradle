@@ -34,6 +34,8 @@ ext {
     rxAndroidVersion = "2.0.2"
     rxJavaVersion = "2.1.14"
     rxKotlinVersion = "2.2.0"
+    retrofitVersion = "2.4.0"
+    converterGsonVersion = "2.4.0"
 }
 
 
