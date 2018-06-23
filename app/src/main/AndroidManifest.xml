@@ -18,7 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AuthenticationActivity"></activity>
+        <activity
+            android:name=".AuthenticationActivity"
+            android:windowSoftInputMode="stateHidden|stateVisible|adjustResize" />
     </application>
 
 </manifest>
