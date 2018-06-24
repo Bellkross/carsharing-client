@@ -14,6 +14,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +24,11 @@
         </activity>
         <activity
             android:name=".AuthorizationActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|stateVisible|adjustResize" />
+        <activity
+            android:name=".CarSharingActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

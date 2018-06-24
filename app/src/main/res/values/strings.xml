@@ -9,4 +9,5 @@
     <string name="sign_in">Sign in</string>
     <string name="no_internet_connection">No internet connection.</string>
     <string name="incorrect_data">Incorrect licence number or password.</string>
+    <string name="sign_out">sign out</string>
 </resources>

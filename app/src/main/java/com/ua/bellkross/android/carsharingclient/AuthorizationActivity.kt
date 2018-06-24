@@ -1,6 +1,7 @@
 package com.ua.bellkross.android.carsharingclient
 
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
@@ -9,9 +10,14 @@ import android.view.View
 import android.widget.Toast
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
+import com.ua.bellkross.android.carsharingclient.PreferenceHelper.licenceNumberKey
+import com.ua.bellkross.android.carsharingclient.PreferenceHelper.passwordKey
+import com.ua.bellkross.android.carsharingclient.PreferenceHelper.preferencesFileName
+import com.ua.bellkross.android.carsharingclient.PreferenceHelper.set
 import com.ua.bellkross.android.carsharingclient.rest.CarsharingApi
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_authorization.*
@@ -22,6 +28,8 @@ import java.util.concurrent.TimeUnit
 class AuthorizationActivity : AppCompatActivity() {
 
     private val logTag = "debug"
+
+    private lateinit var service: Disposable
 
     private val licenceNumberRegex = ".[A-Za-z]+[A-Za-z0-9_]*".toRegex()
     private val passwordRegex = "([A-Za-z0-9]|\\p{Punct}){6,20}".toRegex()
@@ -54,7 +62,7 @@ class AuthorizationActivity : AppCompatActivity() {
                 pbAuthorization.visibility = View.VISIBLE
 
 
-                val service = CarsharingApi.create().authorization(
+                service = CarsharingApi.create().authorization(
                         authorization = "licenceNumber=${etLicenceNumber.text}, " +
                                 "password=${String(Hex.encodeHex(DigestUtils.md5(etPassword.text.toString())))}"
                 ).observeOn(AndroidSchedulers.mainThread())
@@ -66,13 +74,18 @@ class AuthorizationActivity : AppCompatActivity() {
                             pbAuthorization.visibility = View.GONE
 
                             if (isAuthorized) {
-                                Toast.makeText(
-                                        this.applicationContext,
-                                        "Authorized!",
-                                        Toast.LENGTH_SHORT
-                                ).show()
-                                //TODO: GOTO next activity.
-                                //service.dispose()
+                                val preferences =
+                                        PreferenceHelper.customPrefs(
+                                                applicationContext,
+                                                preferencesFileName
+                                        )
+                                preferences[licenceNumberKey] = etLicenceNumber.text.toString()
+                                preferences[passwordKey] = String(Hex.encodeHex(DigestUtils.md5(etPassword.text.toString())))
+
+                                val intent = Intent(this, CarSharingActivity::class.java)
+                                startActivity(intent)
+                                service.dispose()
+                                finish()
                             } else {
                                 Toast.makeText(
                                         this.applicationContext,
