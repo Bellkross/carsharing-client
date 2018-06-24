@@ -25,24 +25,33 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-    implementation "com.android.support:design:${rootProject.ext.supportLibVersion}"
+
+    implementation "com.android.support:recyclerview-v7:${rootProject.ext.supportLibVersion}"
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.android.support:support-v4:${rootProject.ext.supportLibVersion}"
+    implementation "com.android.support:design:${rootProject.ext.supportLibVersion}"
 
     //RxJava,Kotlin,Android
     implementation "io.reactivex.rxjava2:rxandroid:${rootProject.ext.rxAndroidVersion}"
-    implementation "io.reactivex.rxjava2:rxjava:${rootProject.ext.rxJavaVersion}"
     implementation "io.reactivex.rxjava2:rxkotlin:${rootProject.ext.rxKotlinVersion}"
+    implementation "io.reactivex.rxjava2:rxjava:${rootProject.ext.rxJavaVersion}"
 
     //RxBindings
-    implementation "com.jakewharton.rxbinding2:rxbinding:${rootProject.ext.rxBindingVersion}"
     implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:${rootProject.ext.rxBindingVersion}"
     implementation "com.jakewharton.rxbinding2:rxbinding-design:${rootProject.ext.rxBindingVersion}"
+    implementation "com.jakewharton.rxbinding2:rxbinding:${rootProject.ext.rxBindingVersion}"
 
-    //Retrofit & Gson converter
-    implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofitVersion}"
+    //Retrofit
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${rootProject.ext.adapterRxJavaVersion}"
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.ext.converterGsonVersion}"
+    implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofitVersion}"
+
+    //JSON converter
+    implementation "com.google.code.gson:gson:${rootProject.ext.gsonVersion}"
+
+    //MD5
+    implementation "commons-codec:commons-codec:${rootProject.ext.commonCodecVersion}"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

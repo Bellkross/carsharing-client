@@ -1,13 +1,12 @@
 <resources>
     <string name="app_name">CarsharingClient</string>
     <string name="welcome">Welcome</string>
-    <string name="login">Login</string>
-    <string name="login_input_error">Invalid login</string>
+    <string name="licence_number">Licence number</string>
+    <string name="licence_number_input_error">Invalid licence number</string>
     <string name="password">Password</string>
-    <string name="password_input_error">Unreliable, input at least 8 characters</string>
+    <string name="password_input_error">Unreliable, input at least 6 characters</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="sign_up">Sign up</string>
     <string name="sign_in">Sign in</string>
+    <string name="no_internet_connection">No internet connection.</string>
+    <string name="incorrect_data">Incorrect licence number or password.</string>
 </resources>

@@ -10,7 +10,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        val intent = Intent(this, AuthenticationActivity::class.java)
+        val intent = Intent(this, AuthorizationActivity::class.java)
         startActivity(intent)
         finish()
     }
