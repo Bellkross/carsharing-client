@@ -3,6 +3,9 @@ package com.ua.bellkross.android.carsharingclient
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import kotlinx.android.synthetic.main.activity_authorization.*
+import org.apache.commons.codec.binary.Hex
+import org.apache.commons.codec.digest.DigestUtils
 
 
 object PreferenceHelper {

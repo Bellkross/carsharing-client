@@ -10,4 +10,8 @@
     <string name="no_internet_connection">No internet connection.</string>
     <string name="incorrect_data">Incorrect licence number or password.</string>
     <string name="sign_out">sign out</string>
+    <string name="no_available_cars">No available cars.</string>
+    <string name="currency_dollar">$</string>
+    <string name="price_text">price:</string>
+    <string name="refresh">refresh</string>
 </resources>

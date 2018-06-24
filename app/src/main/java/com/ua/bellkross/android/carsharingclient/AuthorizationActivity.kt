@@ -19,6 +19,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.BiFunction
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_authorization.*
 import org.apache.commons.codec.binary.Hex
@@ -67,34 +68,42 @@ class AuthorizationActivity : AppCompatActivity() {
                                 "password=${String(Hex.encodeHex(DigestUtils.md5(etPassword.text.toString())))}"
                 ).observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
-                        .subscribe { isAuthorized ->
+                        .subscribeBy(
+                                onNext = { isAuthorized ->
 
-                            tilLicenceNumber.visibility = View.VISIBLE
-                            tilPassword.visibility = View.VISIBLE
-                            pbAuthorization.visibility = View.GONE
+                                    tilLicenceNumber.visibility = View.VISIBLE
+                                    tilPassword.visibility = View.VISIBLE
+                                    pbAuthorization.visibility = View.GONE
 
-                            if (isAuthorized) {
-                                val preferences =
-                                        PreferenceHelper.customPrefs(
-                                                applicationContext,
-                                                preferencesFileName
-                                        )
-                                preferences[licenceNumberKey] = etLicenceNumber.text.toString()
-                                preferences[passwordKey] = String(Hex.encodeHex(DigestUtils.md5(etPassword.text.toString())))
+                                    if (isAuthorized) {
+                                        val preferences =
+                                                PreferenceHelper.customPrefs(
+                                                        applicationContext,
+                                                        preferencesFileName
+                                                )
+                                        preferences[licenceNumberKey] = etLicenceNumber.text.toString()
+                                        preferences[passwordKey] = String(Hex.encodeHex(DigestUtils.md5(etPassword.text.toString())))
 
-                                val intent = Intent(this, CarSharingActivity::class.java)
-                                startActivity(intent)
-                                service.dispose()
-                                finish()
-                            } else {
-                                Toast.makeText(
-                                        this.applicationContext,
-                                        R.string.incorrect_data,
-                                        Toast.LENGTH_SHORT
-                                ).show()
-                            }
+                                        val intent = Intent(this, CarSharingActivity::class.java)
+                                        startActivity(intent)
+                                        service.dispose()
+                                        finish()
+                                    } else {
+                                        Toast.makeText(
+                                                this.applicationContext,
+                                                R.string.incorrect_data,
+                                                Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
 
-                        }
+                                },
+                                onError = {
+
+                                },
+                                onComplete = {
+
+                                }
+                        )
 
             } else {
                 Toast.makeText(

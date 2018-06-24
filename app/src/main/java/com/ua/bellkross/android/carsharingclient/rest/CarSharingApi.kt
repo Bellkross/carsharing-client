@@ -1,5 +1,6 @@
 package com.ua.bellkross.android.carsharingclient.rest
 
+import com.bellkross.carsharingserver.entity.Car
 import io.reactivex.Observable
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -13,6 +14,12 @@ interface CarSharingApi {
     fun authorization(
             @Header(value = "Authorization") authorization: String
     ): Observable<Boolean>
+
+
+    @GET("/api/client/getAvailableCars")
+    fun getCarsForClient(
+            @Header(value = "Authorization") authorization: String
+    ): Observable<List<Car>>
 
     /**
      * Factory class for convenient creation of the Api Service interface
