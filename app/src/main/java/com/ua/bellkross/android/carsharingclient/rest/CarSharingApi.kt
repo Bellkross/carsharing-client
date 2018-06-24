@@ -8,8 +8,8 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 
 
-interface CarsharingApi {
-    @GET("/api/clients/authorization")
+interface CarSharingApi {
+    @GET("/api/client/authorization")
     fun authorization(
             @Header(value = "Authorization") authorization: String
     ): Observable<Boolean>
@@ -23,14 +23,14 @@ interface CarsharingApi {
         /** Write here ur server port */
         private const val serverPort = "8887"
 
-        fun create(): CarsharingApi {
+        fun create(): CarSharingApi {
             val retrofit = Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .baseUrl("http://$serverIp:$serverPort/")
                     .build()
 
-            return retrofit.create<CarsharingApi>(CarsharingApi::class.java)
+            return retrofit.create<CarSharingApi>(CarSharingApi::class.java)
         }
     }
 }

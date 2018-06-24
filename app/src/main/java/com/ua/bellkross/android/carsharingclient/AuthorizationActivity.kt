@@ -14,7 +14,7 @@ import com.ua.bellkross.android.carsharingclient.PreferenceHelper.licenceNumberK
 import com.ua.bellkross.android.carsharingclient.PreferenceHelper.passwordKey
 import com.ua.bellkross.android.carsharingclient.PreferenceHelper.preferencesFileName
 import com.ua.bellkross.android.carsharingclient.PreferenceHelper.set
-import com.ua.bellkross.android.carsharingclient.rest.CarsharingApi
+import com.ua.bellkross.android.carsharingclient.rest.CarSharingApi
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -62,7 +62,7 @@ class AuthorizationActivity : AppCompatActivity() {
                 pbAuthorization.visibility = View.VISIBLE
 
 
-                service = CarsharingApi.create().authorization(
+                service = CarSharingApi.create().authorization(
                         authorization = "licenceNumber=${etLicenceNumber.text}, " +
                                 "password=${String(Hex.encodeHex(DigestUtils.md5(etPassword.text.toString())))}"
                 ).observeOn(AndroidSchedulers.mainThread())
